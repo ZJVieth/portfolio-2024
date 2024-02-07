@@ -1,0 +1,45 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+
+    --base-page-padding: 10px;
+    --base-header-height: 65px;
+    --base-footer-height: 65px;
+}
+
+header {
+    height: var(--base-header-height);
+    border-bottom: 1px solid black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.language-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+}
+
+.language-wrapper>div {
+    border: 1px solid green;
+}
+
+.settings-toggle-wrapper {}
+
+main {
+    padding: calc(var(--base-header-height) + var(--base-page-padding)) var(--base-page-padding) calc(var(--base-footer-height) + var(--base-page-padding));
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--base-footer-height);
+    border-top: 1px solid black;
+}
