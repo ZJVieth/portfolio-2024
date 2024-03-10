@@ -11,9 +11,11 @@
 
     <header>
         <div class="language-wrapper">
-            <div data-lang="en"></div>
-            <div data-lang="de"></div>
-            <div data-lang="jp"></div>
+            <div data-lang="en">EN</div>
+            <div data-lang="de">
+                DE
+            </div>
+            <div data-lang="jp">JP</div>
         </div>
         <div class="settings-toggle-wrapper">
 
@@ -27,6 +29,20 @@
         </div>
 
         <div class="content">
+            <!-- Sample Content -->
+            <lang-en>
+                <span detail="10">Yadayadayada fluff.</span>
+                <span detail="2">This is a actually important.</span>
+                <span detail="1">I like programming.</span>
+                <span detail="5">When I was kid yadayada.</span>
+            </lang-en>
+            <lang-de>
+                <span detail="1">This is German content.</span>
+            </lang-de>
+            <lang-jp>
+                <span detail="1">This is Japanese content.</span>
+            </lang-jp>
+
         </div>
 
     </main>
@@ -34,6 +50,16 @@
     <footer>
         Links?
     </footer>
+
+    <template id="language-element">
+        <p class="lang-paragraph"></p>
+    </template>
+
+    <script src="js/lib/jquery-3.7.1.min.js"></script>
+    <script src="js/text-animator.js"></script>
+    <script defer src="js/lang-handler.js"></script>
+
+    <script src="js/components/lang-element.js"></script>
 </body>
 
 </html>
