@@ -6,17 +6,27 @@ const LETTER_INTERVAL = 10; //() milliseconds
  * @param {*} sr 
  * @param {jQuery} el 
  * @param {int} el_index 
+ * @param {int|null} spec_detail Specific detail setting to be shown. ALl other detail settings will be ignored.
  * @returns {void}
  */
-function showText(sr, el, el_index = 0) {
+function showText(sr, el, el_index = 0, spec_detail = null) {
     if ($(el).length === 0)
         return;
+
+    const el_detail = parseInt($(el).attr('detail'));
+
+    if ((spec_detail !== null && el_detail !== spec_detail) || // Guards levels other than the specified one
+        el_detail > detail_level // guards against levels higher than the currently set one
+    ) {
+        showText(sr, $(el).next(), el_index + 1, spec_detail);
+        return;
+    }
 
     animateShow(
         sr,
         el,
         el_index,
-        () => showText(sr, $(el).next(), el_index + 1)
+        () => showText(sr, $(el).next(), el_index + 1, spec_detail)
     );
 }
 
@@ -51,16 +61,27 @@ function animateShow(sr, temp_el, el_index, onFinish, letter_index = 0) {
  * @param {} sr ShadowRoot of the current Lang element
  * @param {jQuery} el The first detail span element.
  * @param {int} el_index Index of the current element within the lang element.
+ * @param {int|null} spec_detail A specified detail setting to be hidden. All other detail settings will be ignored.
+ * @param {boolean} hideFully Boolean state defining if all detail settings in this element chain should be hidden.
  * @returns {void}
  */
-function hideText(sr, el, el_index) {
+function hideText(sr, el, el_index, spec_detail = null, hideFully = false) {
     if ($(el).length === 0)
         return;
+
+    const el_detail = parseInt($(el).attr('detail'));
+
+    if ((spec_detail !== null && el_detail !== spec_detail) || // Guards levels other than the specified one
+        (!hideFully && el_detail <= detail_level) // guards against levels higher than the currently set one
+    ) {
+        hideText(sr, $(el).prev(), el_index - 1, spec_detail, hideFully);
+        return;
+    }
 
     animateHide(
         sr,
         el_index,
-        () => hideText(sr, $(el).prev(), el_index - 1)
+        () => hideText(sr, $(el).prev(), el_index - 1, spec_detail, hideFully)
     );
 }
 

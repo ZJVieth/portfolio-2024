@@ -37,12 +37,13 @@ function updateLanguage(lang) {
  * @param {string} lang 
  */
 function hideLanguage(lang) {
-
     $(`lang-${lang}`).each((i, el) => {
         hideText(
             $(el)[0]?.shadowRoot,
             $(el).find('span').last(),
-            $(el).find('span').length - 1
+            $(el).find('span').length - 1,
+            null,
+            true
         );
     });
 
