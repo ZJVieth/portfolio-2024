@@ -1,5 +1,5 @@
 
-const LETTER_INTERVAL = 10; //() milliseconds
+const LETTER_INTERVAL = 5; //() milliseconds
 
 /**
  * Recursively iterates over the span elements of a language element to trigger the showing animation.
@@ -41,7 +41,7 @@ function showText(sr, el, el_index = 0, spec_detail = null) {
  * @returns {void}
  */
 function animateShow(sr, temp_el, el_index, onFinish, letter_index = 0) {
-    const span_el = $(sr).find('span')[el_index];
+    const span_el = $(sr).find('.lang-paragraph').find('span')[el_index];
     const text = $(temp_el).html().trim();
 
     if (letter_index >= text.length) {
@@ -94,7 +94,7 @@ function hideText(sr, el, el_index, spec_detail = null, hideFully = false) {
  * @returns {void}
  */
 function animateHide(sr, el_index, onFinish) {
-    const span_el = $(sr).find('span')[el_index];
+    const span_el = $(sr).find('.lang-paragraph').find('span')[el_index];
 
     if ($(span_el).html().length <= 0) {
         onFinish();
